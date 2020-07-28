@@ -112,7 +112,8 @@ body {
   -moz-animation: slideDown 1000ms ease-out;
   -o-animation: slideDown 1000ms ease-out;
   -webkit-animation: slideDown 1000ms ease-out;  
-  animation: slideDown 1000ms ease-in-out;
+  animation: slideDown 1000ms ease-out;
+  z-index: 2;
 }
 
 
@@ -120,7 +121,7 @@ body {
   -moz-animation: vibrate 1000ms ease-out;
   -o-animation: vibrate 1000ms ease-out;
   -webkit-animation: vibrate 1000ms ease-out;  
-  animation: vibrate 1000ms ease-in-out;
+  animation: vibrate 1000ms ease-out;
 }
 
 .spin {
@@ -167,39 +168,28 @@ body {
 
 
 @keyframes spin {
-  from{
-    transform: rotate(0deg);
-    background-color: #83e377;
+  from, to{
+    transform: translateY(0);
+    background-color: rgba(0, 200, 0, 0);
     background-blend-mode: multiply;
   }
-  to{
-    transform: rotate(360deg);
-    background-blend-mode: none;
+  50% {
+    background-color: rgba(0, 200, 0, 1);
+    background-blend-mode: multiply;
+    transform: translateY(100vh);
   }
 }
 
 @keyframes vibrate {
-  0% {
-    background-color: rgba(221, 28, 26, 0.5);
+  from, to{
+    transform: translateY(0);
+    background-color: rgba(200, 0, 0, 0);
     background-blend-mode: multiply;
   }
-  10%, 90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-  
-  20%, 80% {
-    transform: translate3d(2px, 0, 0);
-  }
-
-  30%, 50%, 70% {
-    transform: translate3d(-4px, 0, 0);
-  }
-
-  40%, 60% {
-    transform: translate3d(4px, 0, 0);
-  }
-  100% {
-    background-color: none;
+  50% {
+    background-color: rgba(200, 0, 0, 1);
+    background-blend-mode: multiply;
+    transform: translateY(-100vh);
   }
 }
 
