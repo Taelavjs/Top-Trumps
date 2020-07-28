@@ -1,0 +1,196 @@
+:root {
+  --orange: #fb5607;
+  --yellow: #FFBE08;
+  --pink: #FF006E;
+  --purple: #8338EC;
+  --blue: #3A86FF;
+  --background: #00317a;
+}
+
+body {
+  background: linear-gradient(0deg, rgba(58,134,255,1) 10%, rgba(255,0,110,1) 90%);
+  filter: blur(0.5px);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  font-family: 'Averia Serif Libre', cursive;
+}
+
+.playingArea {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.marginedArea {
+  height: 90%;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.card {
+  height: 100%;
+  width: 40%;
+  background-color: var(--blue);
+  background-image: url(/fonts/imagey/card-blank-design-3.jpg);
+  background-size: cover;
+  background-position: center;
+  border-top: 2px solid black;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
+  border: 1px solid var(--purple);
+  /* animation-name: slideUp;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  backface-visibility: hidden; */
+}
+
+.flip {
+  animation-name: flipCard;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  backface-visibility: hidden;
+}
+
+.playerTwoCard {
+
+}
+
+.stats {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.9em;
+}
+
+.stat {
+  overflow: hidden;
+  height: 10%;
+  width: 70%;
+  margin: 20px 0;
+}
+
+.temp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin-right: auto;
+ transition: all 300ms ease-out;
+}
+
+.title:hover {
+  color: var(--orange);
+}
+
+.victoryBanner {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4em;
+  color: var(--purple);
+  background-color: var(--yellow);
+  -moz-animation: slideDown 1000ms ease-out;
+  -o-animation: slideDown 1000ms ease-out;
+  -webkit-animation: slideDown 1000ms ease-out;  
+  animation: slideDown 1000ms ease-in-out;
+}
+
+
+.vibrate {
+  -moz-animation: vibrate 1000ms ease-out;
+  -o-animation: vibrate 1000ms ease-out;
+  -webkit-animation: vibrate 1000ms ease-out;  
+  animation: vibrate 1000ms ease-in-out;
+}
+
+.spin {
+  -moz-animation: spin 1000ms ease-out;
+  -o-animation: spin 1000ms ease-out;
+  -webkit-animation: spin 1000ms ease-out;  
+  animation: spin 1000ms ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100vh);
+  }
+  to {
+    transform: translateY(0vh);
+  }
+}
+
+
+@keyframes spin {
+  from{
+    transform: rotate(0deg);
+    background-color: #83e377;
+    background-blend-mode: multiply;
+  }
+  to{
+    transform: rotate(360deg);
+    background-blend-mode: none;
+  }
+}
+
+@keyframes vibrate {
+  0% {
+    background-color: rgba(221, 28, 26, 0.5);
+    background-blend-mode: multiply;
+  }
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+  100% {
+    background-color: none;
+  }
+}
+
+@keyframes slideUp {
+  from {
+
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes flipCard {
+  from {
+    transform: rotateY(180deg);
+  }
+  to {
+    transform: rotateY(0deg);
+  }
+}
