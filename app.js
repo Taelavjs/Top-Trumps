@@ -224,9 +224,12 @@ const failSound = (url) => {
 const resultAnimation = (classNameW, classNameL) => {
   displayedCard[0].classList.add(classNameW);
   displayedCard[1].classList.add(classNameL);
-  setTimeout(() => displayedCard[0].classList.remove(classNameW), 1000);
-  setTimeout(() => displayedCard[1].classList.remove(classNameL), 1000);
+  setTimeout(() => {
+    displayedCard[0].classList.remove(classNameW);
+    displayedCard[1].classList.remove(classNameL);
+  }, 1000);
 }
+
 
 // Scope
 createNames();
