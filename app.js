@@ -188,7 +188,8 @@ const passCardToWinner = (winner, loser) => {
 }
 
 const winningScreen = () => {
-  if(playerOneDeck.length === 0 || playerTwoDeck === 0){
+  console.log('heya');
+  if(playerOneDeck.length === 0 || playerTwoDeck.length === 0){
     switch(playerOneDeck.length === deckSize){
       case true:
         wonMsg = '<h1>Player One Wins<h1>';
@@ -262,6 +263,5 @@ const setDeckSize = () => {
 
 
 // Scope
-createNames();
-createDeck();
-document.addEventListener('click', test);
+
+
