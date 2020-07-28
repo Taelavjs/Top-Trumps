@@ -1,4 +1,4 @@
-const deckSize = 52;
+var deckSize = 52;
 var deck = [];
 var playerOneDeck = [];
 var playerTwoDeck = [];
@@ -25,7 +25,7 @@ const randomVal = (maxValue, minValue) => Math.floor(Math.random() * maxValue) +
 
 // functions
 
-const createDeck = () => {
+const createDeck = (deckSize) => {
   for(let i=0; i < deckSize; i++){
     let maxStatLevel = 10;
     let minStatLevel = 1;
@@ -57,8 +57,8 @@ const createPlayersDeck = (playingCard, i) => {
   }
 }
 
-const createNames = () => {
-  fetch(`https://randomuser.me/api/?results=52`)
+const createNames = (deckSize) => {
+  fetch(`https://randomuser.me/api/?results=${deckSize}`)
   .then( (res) => res.text())
   .then( (data) => {
     data = JSON.parse(data);
@@ -191,12 +191,12 @@ const winningScreen = () => {
   if(playerOneDeck.length === 0 || playerTwoDeck === 0){
     switch(playerOneDeck.length === deckSize){
       case true:
-        wonMsg = 'Player One Wins';
+        wonMsg = '<h1>Player One Wins<h1>';
         winningBoard.classList.add('victoryBanner');
         winningBoard.innerHTML = wonMsg;
         break;
       case false: 
-        const wonMsg = 'Player TWO Wins'
+        const wonMsg = '<h1>Player TWO Wins<h1>'
         winningBoard.classList.add('victoryBanner');
         winningBoard.innerHTML = wonMsg;
         break;
@@ -229,6 +229,36 @@ const resultAnimation = (classNameW, classNameL) => {
     displayedCard[1].classList.remove(classNameL);
   }, 1000);
 }
+
+const setDeckSize = () => {
+  const deck = document.getElementById('deckSize').value;
+  deckSize = deck;
+  main = document.querySelector('.mainMenu');
+  main.classList.add('slideUp');
+  setTimeout(() => {
+    main.classList.add('noDisplay');
+    main.classList.remove('slideUp');
+    main.classList.add('noDisplay');
+    main.classList.remove('mainMenu');
+    main.classList.add('noDisplay');
+  }, 1000);
+  const secondCard = document.querySelector('#debug').value;
+  switch(secondCard == 'on'){
+    case true:
+      document.querySelector('.second').classList.remove('card');
+      document.querySelector('.second').classList.remove('playerTwoCard');
+      document.querySelector('.second').classList.add('noDisplay');
+      break;
+    case false:
+      break;
+  }
+
+
+  createNames(deckSize);
+  createDeck(deckSize);
+  document.addEventListener('click', test);
+}
+
 
 
 // Scope
