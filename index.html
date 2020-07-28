@@ -9,6 +9,17 @@
   <title>Top Trumps</title>
 </head>
 <body>
+  <div class="mainMenu menu">
+    <h1>Top Trumps!</h1>
+    <div class="inputs">
+      <label for="deckSize">Size of the deck</label>
+      <input type="text" name="deckSize" id="deckSize">
+    </div>
+    <input type="button" value="submit" class="submit" onclick="setDeckSize()">
+    <label for="debuggerMode">Ez Mode</label>
+    <input type="checkbox" name="debuggerMode" id="debug">
+
+  </div>
   <div class="winArea">
 
   </div>
@@ -34,7 +45,7 @@
           </div>
         </div>
       </div>
-      <div class="playerTwoCard card">
+      <div class="playerTwoCard card second">
         <div class="stats">
           <div class="stat">
             <p class="temp name"></p>
