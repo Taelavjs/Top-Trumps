@@ -5,6 +5,16 @@ var playerTwoDeck = [];
 var playerCount = 2;
 var players = [playerOneDeck, playerTwoDeck];
 
+
+var names = document.querySelectorAll('.name'),
+    strengths = document.querySelectorAll('.strength'),
+    speeds = document.querySelectorAll('.speed'),
+    intelligences = document.querySelectorAll('.intelligence'),
+    visibilitys = document.querySelectorAll('.visibility'),
+    displayedCard = document.querySelectorAll('.card'),
+    winningBoard = document.querySelector('.winArea');
+
+
 // Objects
 
 class card {
@@ -24,6 +34,59 @@ const clearFromLocalStorage = (key) => localStorage.removeItem(key);
 const randomVal = (maxValue, minValue) => Math.floor(Math.random() * maxValue) + minValue;
 
 // functions
+
+const createNames = (deckSize) => {
+  fetch(`https://randomuser.me/api/?results=${deckSize}`)
+  .then( (res) => res.text())
+  .then( (data) => {
+    data = JSON.parse(data);
+    const listOfNames = data.results;
+    var i = 0;
+    listOfNames.forEach( () => {
+      lastName = data.results[i].name.last;
+      firstName = data.results[i].name.first;
+      fullName = `${firstName} ${lastName}`;
+      deck[i].name = fullName;
+      i++;
+    })
+    displayCardData(playerOneDeck, playerTwoDeck);
+  })
+    .catch( (err) => console.log(err));
+}
+
+const displayCardData = (playerOneDeck, playerTwoDeck) => {  
+  for(let i = 0; i < playerCount; i++){
+    switch(isEven(i)){
+      case true:
+        let name = playerOneDeck[0].name;
+        let strength = playerOneDeck[0].strength;
+        let speed = playerOneDeck[0].speed;
+        let intelligence = playerOneDeck[0].intelligence;
+        let visibility = playerOneDeck[0].visibility;
+        names[i].innerHTML = `${name}`;
+        strengths[i].innerHTML = `<span class="title">Strength</span>  <span class="value">${strength}</span>`;
+        speeds[i].innerHTML = `<span class="title">Speed</span>  <span class="value">${speed}</span>`;
+        intelligences[i].innerHTML = `<span class="title">Intelligence</span>  <span class="value">${intelligence}</span>`;
+        visibilitys[i].innerHTML = `<span class="title">Visibility</span>  <span class="value">${visibility}</span>`;
+
+        break;
+      case false:
+        let name2 = playerTwoDeck[0].name;
+        let strength2 = playerTwoDeck[0].strength;
+        let speed2 = playerTwoDeck[0].speed;
+        let intelligence2 = playerTwoDeck[0].intelligence;
+        let visibility2 = playerTwoDeck[0].visibility;
+        names[i].innerHTML = `${name2}`;
+        strengths[i].innerHTML = `<span class="title">Strength</span>  <span class="value">${strength2}</span>`;
+        speeds[i].innerHTML = `<span class="title">Speed</span>  <span class="value">${speed2}</span>`;
+        intelligences[i].innerHTML = `<span class="title">Intelligence</span>  <span class="value">${intelligence2}</span>`;
+        visibilitys[i].innerHTML = `<span class="title">Visibility</span>  <span class="value">${visibility2}</span>`;
+        break;
+    }
+  }
+}
+
+
 
 const createDeck = (deckSize) => {
   for(let i=0; i < deckSize; i++){
@@ -57,76 +120,9 @@ const createPlayersDeck = (playingCard, i) => {
   }
 }
 
-const createNames = (deckSize) => {
-  fetch(`https://randomuser.me/api/?results=${deckSize}`)
-  .then( (res) => res.text())
-  .then( (data) => {
-    data = JSON.parse(data);
-    const listOfNames = data.results;
-    var i = 0;
-    listOfNames.forEach( () => {
-      lastName = data.results[i].name.last;
-      firstName = data.results[i].name.first;
-      fullName = `${firstName} ${lastName}`;
-      deck[i].name = fullName;
-      i++;
-    })
-    displayCardData(playerOneDeck, playerTwoDeck);
-  })
-    .catch( (err) => console.log(err));
-}
-
-const tradeCards = () => {
-
-}
-
-var names = document.querySelectorAll('.name'),
-    strengths = document.querySelectorAll('.strength'),
-    speeds = document.querySelectorAll('.speed'),
-    intelligences = document.querySelectorAll('.intelligence'),
-    visibilitys = document.querySelectorAll('.visibility'),
-    displayedCard = document.querySelectorAll('.card'),
-    winningBoard = document.querySelector('.winArea');
 
 
-
-const displayCardData = (playerOneDeck, playerTwoDeck) => {
-  if(playerOneDeck.length === 0 || playerTwoDeck === 0){
-
-  }  
-    for(let i = 0; i < playerCount; i++){
-      switch(isEven(i)){
-        case true:
-          let name = playerOneDeck[0].name;
-          let strength = playerOneDeck[0].strength;
-          let speed = playerOneDeck[0].speed;
-          let intelligence = playerOneDeck[0].intelligence;
-          let visibility = playerOneDeck[0].visibility;
-          names[i].innerHTML = `${name}`;
-          strengths[i].innerHTML = `<span class="title">Strength</span>  <span class="value">${strength}</span>`;
-          speeds[i].innerHTML = `<span class="title">Speed</span>  <span class="value">${speed}</span>`;
-          intelligences[i].innerHTML = `<span class="title">Intelligence</span>  <span class="value">${intelligence}</span>`;
-          visibilitys[i].innerHTML = `<span class="title">Visibility</span>  <span class="value">${visibility}</span>`;
-
-          break;
-        case false:
-          let name2 = playerTwoDeck[0].name;
-          let strength2 = playerTwoDeck[0].strength;
-          let speed2 = playerTwoDeck[0].speed;
-          let intelligence2 = playerTwoDeck[0].intelligence;
-          let visibility2 = playerTwoDeck[0].visibility;
-          names[i].innerHTML = `${name2}`;
-          strengths[i].innerHTML = `<span class="title">Strength</span>  <span class="value">${strength2}</span>`;
-          speeds[i].innerHTML = `<span class="title">Speed</span>  <span class="value">${speed2}</span>`;
-          intelligences[i].innerHTML = `<span class="title">Intelligence</span>  <span class="value">${intelligence2}</span>`;
-          visibilitys[i].innerHTML = `<span class="title">Visibility</span>  <span class="value">${visibility2}</span>`;
-          break;
-      }
-    }
-}
-
-
-const test = e => {
+const getValuesForComparison = e => {
   classList = e.target.classList;
   switch(classList == 'title'){
     case true:
@@ -159,9 +155,6 @@ const compareValues = (valPlayerOne, valPlayerTwo) => {
   exchangeCards(whoWon);
 }
   
-
-
-
 
 const exchangeCards = (whoWon) => {
   switch(whoWon){
@@ -232,7 +225,18 @@ const resultAnimation = (classNameW, classNameL) => {
 }
 
 const setDeckSize = () => {
-  const deck = document.getElementById('deckSize').value;
+  const errorMsg = document.querySelector('.error');
+  var deck = document.getElementById('deckSize').value;
+  if(deck < 3 || deck > 52 || isEven(deck) === false){
+    document.getElementById('deckSize').focus();
+    errorMsg.classList.remove('noDisplay');
+  } else {
+    errorMsg.classList.add('noDisplay');
+    startUp(deck);
+  }
+}
+
+function startUp(deck) {
   deckSize = deck;
   main = document.querySelector('.mainMenu');
   main.classList.add('slideUp');
@@ -254,14 +258,9 @@ const setDeckSize = () => {
       break;
   }
 
-
   createNames(deckSize);
   createDeck(deckSize);
-  document.addEventListener('click', test);
+  document.addEventListener('click', getValuesForComparison);
 }
-
-
-
-// Scope
 
 
