@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="shortcut icon" href="#">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -12,8 +13,11 @@
   <div class="mainMenu menu">
     <h1>Top Trumps!</h1>
     <div class="inputs">
-      <label for="deckSize">Size of the deck</label>
-      <input type="text" name="deckSize" id="deckSize">
+      <div class="decksize">
+        <label for="deckSize">Size of the deck</label>
+        <input type="number" name="deckSize" id="deckSize">
+      </div>
+      <div class="error noDisplay">Please Pick A Value Between 10 And 52</div>
     </div>
     <input type="button" value="submit" class="submit" onclick="setDeckSize()">
     <label for="debuggerMode">Ez Mode</label>
