@@ -263,4 +263,3 @@ function startUp(deck) {
   document.addEventListener('click', getValuesForComparison);
 }
 
-
