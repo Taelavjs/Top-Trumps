@@ -31,7 +31,9 @@ body {
   height: 90%;
   width: 90%;
   display: flex;
+  -ms-flex-direction: row;
   flex-direction: row;
+  -ms-text-content: space-evenly;
   justify-content: space-evenly;
   align-items: center;
 }
@@ -60,10 +62,6 @@ body {
   animation-duration: 1s;
   animation-timing-function: ease-out;
   backface-visibility: hidden;
-}
-
-.playerTwoCard {
-
 }
 
 .stats {
@@ -126,9 +124,24 @@ h1 {
 .inputs {
   width: 50ch;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
+.decksize {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error {
+  background-color: #ff00009a;
+  padding: 10px;
+  width: 90%;
+  text-align: center;
+}
+
 label {
   font-family: 'Press Start 2P';
   margin: 20px;
