@@ -42,7 +42,7 @@ body {
   height: 100%;
   width: 40%;
   background-color: var(--blue);
-  background-image: url(/fonts/imagey/card-blank-design-3.jpg);
+  background-image: url(fonts/imagey/card-blank-design-3.jpg);
   background-size: cover;
   background-position: center;
   border-top: 2px solid black;
