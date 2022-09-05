@@ -35,6 +35,7 @@ const randomVal = (maxValue, minValue) => Math.floor(Math.random() * maxValue) +
 
 // functions
 
+//Player selects how many cards in a deck, ask API to search for this many names
 const createNames = (deckSize) => {
   fetch(`https://randomuser.me/api/?results=${deckSize}`)
   .then( (res) => res.text())
@@ -54,6 +55,7 @@ const createNames = (deckSize) => {
     .catch( (err) => console.log(err));
 }
 
+//Sets the two cards for each player on their turn. (Deals the current rounds cards to the players)
 const displayCardData = (playerOneDeck, playerTwoDeck) => {  
   for(let i = 0; i < playerCount; i++){
     switch(isEven(i)){
@@ -87,7 +89,7 @@ const displayCardData = (playerOneDeck, playerTwoDeck) => {
 }
 
 
-
+//
 const createDeck = (deckSize) => {
   for(let i=0; i < deckSize; i++){
     let maxStatLevel = 10;
