@@ -1,3 +1,5 @@
 # teriffect.github.io
 
-Bascially a game of Top Trumps - Highest Value Wins
+Basic Game of Top Trumps - Highest Value Wins
+Works with an API to generate card names
+Involves some animations, sounds.
