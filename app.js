@@ -31,6 +31,8 @@ class card {
 
 const passToLocalStorage = (key, item) => localStorage.setItem(key, JSON.stringify(item));
 const clearFromLocalStorage = (key) => localStorage.removeItem(key);
+
+//random value betweek min and max
 const randomVal = (maxValue, minValue) => Math.floor(Math.random() * maxValue) + minValue;
 
 // functions
@@ -60,6 +62,7 @@ const displayCardData = (playerOneDeck, playerTwoDeck) => {
   for(let i = 0; i < playerCount; i++){
     switch(isEven(i)){
       case true:
+        // Displays top cards values
         let name = playerOneDeck[0].name;
         let strength = playerOneDeck[0].strength;
         let speed = playerOneDeck[0].speed;
@@ -117,13 +120,15 @@ const createPlayersDeck = (playingCard, i) => {
       break;
   }
   if(i == deckSize - 1){
-    passToLocalStorage('playerOneDeck', JSON.stringify(playerOneDeck));
-    passToLocalStorage('playerTwoDeck', JSON.stringify(playerTwoDeck));
+    console.log(playerOneDeck);
+    // This is the problem involving local storage, unsure why
+    passToLocalStorage('playerOneDeck', playerOneDeck);
+    passToLocalStorage('playerTwoDeck', playerTwoDeck);
   }
 }
 
 
-
+//On click checks for if the player clicked an attribute. gets opponents value for comparison
 const getValuesForComparison = e => {
   classList = e.target.classList;
   switch(classList == 'title'){
@@ -140,6 +145,8 @@ const getValuesForComparison = e => {
   }
 }
 
+
+//compares the two values p1 vs p2. decides a winner
 const compareValues = (valPlayerOne, valPlayerTwo) => {
   let whoWon;
   if(valPlayerOne-1 > valPlayerTwo-1){
@@ -157,7 +164,7 @@ const compareValues = (valPlayerOne, valPlayerTwo) => {
   exchangeCards(whoWon);
 }
   
-
+//gives the lost card to the winner, moves cards to the back of their deck
 const exchangeCards = (whoWon) => {
   switch(whoWon){
     case 'playerOne':
@@ -182,17 +189,18 @@ const passCardToWinner = (winner, loser) => {
   winningScreen();
 }
 
+//writes winners message
 const winningScreen = () => {
-  console.log('heya');
+  let wonMsg;
   if(playerOneDeck.length === 0 || playerTwoDeck.length === 0){
-    switch(playerOneDeck.length === deckSize){
+    switch(playerTwoDeck.length < playerOneDeck.length){
       case true:
         wonMsg = '<h1>Player One Wins<h1>';
         winningBoard.classList.add('victoryBanner');
         winningBoard.innerHTML = wonMsg;
         break;
       case false: 
-        const wonMsg = '<h1>Player TWO Wins<h1>'
+        wonMsg = '<h1>Player TWO Wins<h1>'
         winningBoard.classList.add('victoryBanner');
         winningBoard.innerHTML = wonMsg;
         break;
