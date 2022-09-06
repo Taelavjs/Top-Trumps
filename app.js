@@ -1,5 +1,6 @@
 var deckSize = 52;
-var deck = [];
+let deck = [];
+let namesList = [];
 var playerOneDeck = [];
 var playerTwoDeck = [];
 var playerCount = 2;
@@ -29,7 +30,7 @@ class card {
 
 // LS
 
-const passToLocalStorage = (key, item) => localStorage.setItem(key, JSON.stringify(item));
+let passToLocalStorage = (key, item) => localStorage.setItem(key, JSON.stringify(item));
 const clearFromLocalStorage = (key) => localStorage.removeItem(key);
 
 //random value betweek min and max
@@ -50,8 +51,11 @@ const createNames = (deckSize) => {
       firstName = data.results[i].name.first;
       fullName = `${firstName} ${lastName}`;
       deck[i].name = fullName;
+      namesList[i] = fullName;
       i++;
     })
+    passToLocalStorage('deck', deck);
+
     displayCardData(playerOneDeck, playerTwoDeck);
   })
     .catch( (err) => console.log(err));
@@ -102,11 +106,13 @@ const createDeck = (deckSize) => {
     var intelligence = randomVal(maxStatLevel, minStatLevel);
     var visibility = randomVal(maxStatLevel, minStatLevel);
 
-    const playingCard = new card('abe', speed, strength, intelligence, visibility);
+    let playingCard = new card(namesList[i], speed, strength, intelligence, visibility);
     deck[i] = playingCard;
-    passToLocalStorage('deck', deck);
     createPlayersDeck(playingCard, i);
   }
+  createNames(deckSize);
+  console.log(deck[0].name);
+
 }
 
 const createPlayersDeck = (playingCard, i) => {
@@ -121,9 +127,6 @@ const createPlayersDeck = (playingCard, i) => {
   }
   if(i == deckSize - 1){
     console.log(playerOneDeck);
-    // This is the problem involving local storage, unsure why
-    passToLocalStorage('playerOneDeck', playerOneDeck);
-    passToLocalStorage('playerTwoDeck', playerTwoDeck);
   }
 }
 
@@ -248,6 +251,8 @@ const setDeckSize = () => {
 
 function startUp(deck) {
   deckSize = deck;
+  const secondCard = document.querySelector('#debug').checked;
+
   main = document.querySelector('.mainMenu');
   main.classList.add('slideUp');
   setTimeout(() => {
@@ -257,18 +262,19 @@ function startUp(deck) {
     main.classList.remove('mainMenu');
     main.classList.add('noDisplay');
   }, 1000);
-  const secondCard = document.querySelector('#debug').value;
-  switch(secondCard == 'on'){
+  console.log(secondCard);
+  switch(secondCard == true){
     case true:
+
+      break;
+    case false:
       document.querySelector('.second').classList.remove('card');
       document.querySelector('.second').classList.remove('playerTwoCard');
       document.querySelector('.second').classList.add('noDisplay');
       break;
-    case false:
-      break;
   }
 
-  createNames(deckSize);
+
   createDeck(deckSize);
   document.addEventListener('click', getValuesForComparison);
 }
